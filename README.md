@@ -562,6 +562,7 @@ Two snapshots are worth taking, since they tell different parts of the story:
 | Startup time (Spring Boot's own logged duration) | 10.284s                 | 2.26s                 | ~78% smaller |
 | Idle memory (immediately after startup)          | 339.4MB                 | 255.9MB               | ~25% smaller |
 | Memory after a few requests                      | 441.3MB                 | 296.5MB               | ~33% smaller |
+
 Note:
 * Content size obtained by command:  `docker images`
 * JVM Docker startup time:  `docker logs jvm-app | grep -i started`
