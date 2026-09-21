@@ -1,0 +1,24 @@
+# Stage 1: Build the native image using GraalVM
+FROM ghcr.io/graalvm/native-image-community:17 AS build
+WORKDIR /app
+
+COPY .git /app/.git
+RUN microdnf install -y findutils && microdnf clean all
+
+COPY gradlew /app/
+COPY gradle /app/gradle
+COPY build.gradle settings.gradle /app/
+COPY src /app/src
+
+RUN ./gradlew nativeCompile --no-daemon -x test
+
+# Stage 2: Final production-ready image
+FROM debian:bookworm-slim
+WORKDIR /app
+COPY --from=build /app/build/native/nativeCompile/microservices-bootstrap /app/microservices-bootstrap
+RUN chmod +x /app/microservices-bootstrap
+RUN groupadd -g 1001 spring && useradd -u 1001 -g spring -s /bin/false spring
+RUN chown spring:spring /app/microservices-bootstrap
+USER 1001
+EXPOSE 8080
+ENTRYPOINT ["./microservices-bootstrap"]
