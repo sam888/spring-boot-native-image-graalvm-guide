@@ -788,3 +788,7 @@ microservice.
 - [GraalVM Native Build Tools (Gradle plugin)](https://graalvm.github.io/native-build-tools/latest/gradle-plugin.html)
 - [GraalVM Reachability Metadata Repository](https://github.com/oracle/graalvm-reachability-metadata)
 - Commit referenced in this guide: [`c28539e`](https://github.com/sam888/microservices-bootstrap/commit/c28539e69b266e8ad70c6af0a4f41c7b75b509c3)
+
+---
+
+Author: Samuel Huang
